@@ -1,0 +1,5 @@
+require 'technoweenie/attachment_fu/processors/core_image_processor'
+# require 'technoweenie/attachment_fu/processors/gd2_processor'
+require 'technoweenie/attachment_fu/processors/image_science_processor'
+require 'technoweenie/attachment_fu/processors/mini_magick_processor'
+require 'technoweenie/attachment_fu/processors/rmagick_processor'

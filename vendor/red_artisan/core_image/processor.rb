@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'osx/cocoa'
+# require 'cocoa'
 require 'active_support'
 
 require 'red_artisan/core_image/filters/scale'
@@ -92,7 +92,7 @@ end
 
 module OSX
   class CIImage
-    include OCObjWrapper
+    # include OCObjWrapper
   
     def method_missing_with_filter_processing(sym, *args, &block)
       f = OSX::CIFilter.filterWithName("CI#{sym.to_s.camelize}")

@@ -3,10 +3,13 @@ if defined?(Rails::Engine)
   # Rails >= 3
   class Engine < Rails::Engine
     # Mimic old vendored plugin behavior, attachment_fu/lib is autoloaded.
-    config.autoload_paths << File.expand_path("..", __FILE__)
+    # config.autoload_paths << File.expand_path("..", __FILE__)
 
     initializer "attachment_fu" do
       require 'geometry'
+      require 'technoweenie/attachment_fu'
+      require 'technoweenie/attachment_fu/backends/backends'
+      require 'technoweenie/attachment_fu/processors/processors'
 
       ActiveRecord::Base.send(:extend, Technoweenie::AttachmentFu::ActMethods)
       Technoweenie::AttachmentFu.tempfile_path = ATTACHMENT_FU_TEMPFILE_PATH if Object.const_defined?(:ATTACHMENT_FU_TEMPFILE_PATH)
