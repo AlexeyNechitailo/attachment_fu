@@ -18,8 +18,8 @@ module Technoweenie # :nodoc:
           end
 
           begin
-            @@s3_config_path = base.attachment_options[:s3_config_path] || (Rails.root.join('config/amazon_s3_images.yml'))
-            @@s3_config = @@s3_config = YAML.load(ERB.new(File.read(@@s3_config_path)).result)[Rails.env].symbolize_keys
+            @@s3_config_path = base.attachment_options[:s3_config_path] || (Rails.root.join('config/s3_images.yml'))
+            @@s3_config = YAML.load(ERB.new(File.read(@@s3_config_path)).result)[Rails.env].symbolize_keys
           end
 
           bucket_key = base.attachment_options[:bucket_key]
@@ -31,7 +31,7 @@ module Technoweenie # :nodoc:
           end
           base.class_eval(eval_string, __FILE__, __LINE__)
 
-          @@s3_conn = Aws::S3::Client.new(s3_config.slice(:access_key_id, :secret_access_key, :server, :port, :use_ssl, :persistent, :proxy))
+          @@s3_conn = Aws::S3::Client.new(s3_config.slice(:access_key_id, :secret_access_key, :server, :port, :use_ssl, :persistent, :proxy, :region))
 
           base.before_update :rename_file
         end
